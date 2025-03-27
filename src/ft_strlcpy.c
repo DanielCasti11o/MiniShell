@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Mini.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 20:13:00 by dacastil         ###   ########.fr       */
+/*   Created: 2024/09/18 18:47:35 by dacastil          #+#    #+#             */
+/*   Updated: 2025/03/27 19:46:10 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+#include <stdio.h>
 #include "../include/Mini.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int		i;
-	char	*line_prompt;
-	char	*user;
-	char	*pwd;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	user = getenv("USER");
-	pwd = getenv("PWD");
-	user = ft_strjoin(user, "-");
-	user = ft_strjoin(user, pwd);
-	line_prompt = readline(user);
-	while (line_prompt != NULL)
+	j = 0;
+	while (src[j] != '\0')
 	{
-		printf("-->> %s\n", line_prompt);
-		line_prompt = readline(user);
+		j++;
 	}
-	// while (env[i])
-	// {
-	// 	printf("--> %s\n", env[i]);
-	// 	i++;
-	// }
-	return (0);
+	if (size == 0)
+		return (j);
+	while (i < (size - 1) && src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (j);
 }
+/*
+int main()
+{
 
+	char dst[20] = "";
+	const char src[] = "Adios";
+	size_t n = 4;
+
+	printf("%d\n", ft_strlcpy(dst, src, n));
+	return 0;
+}
+*/

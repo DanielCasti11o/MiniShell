@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Mini.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 20:13:00 by dacastil         ###   ########.fr       */
+/*   Created: 2024/09/17 20:31:42 by dacastil          #+#    #+#             */
+/*   Updated: 2025/03/27 19:45:50 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Mini.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_strlen(const char *s)
 {
-	int		i;
-	char	*line_prompt;
-	char	*user;
-	char	*pwd;
+	int	i;
 
 	i = 0;
-	user = getenv("USER");
-	pwd = getenv("PWD");
-	user = ft_strjoin(user, "-");
-	user = ft_strjoin(user, pwd);
-	line_prompt = readline(user);
-	while (line_prompt != NULL)
+	while (s[i] != '\0')
 	{
-		printf("-->> %s\n", line_prompt);
-		line_prompt = readline(user);
+		i++;
 	}
-	// while (env[i])
-	// {
-	// 	printf("--> %s\n", env[i]);
-	// 	i++;
-	// }
-	return (0);
+	return (i);
 }
-
