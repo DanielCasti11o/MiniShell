@@ -6,7 +6,7 @@
 #    By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 10:53:25 by dacastil          #+#    #+#              #
-#    Updated: 2025/03/28 03:38:03 by dacastil         ###   ########.fr        #
+#    Updated: 2025/03/28 14:50:10 by dacastil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ EXEC = libpipex.a
 AR = ar rcs
 CC = cc
 RM = rm -f
-FLAGS = -Wall -Wextra -Werror -g3 -I./pipex/libft_bonus -L./pipex/libft_bonus -I ./include
+FLAGS = -Wall -Wextra -Werror -g3 -I./pipex/libft_bonus -I ./include
 SRC_DIR = ./src
 INCLUDE_DIR = ./pipex.h
 LIBFT_DIR = ./libft_bonus
@@ -78,7 +78,7 @@ $(EXEC): $(OBJS) $(LIBFT)
 	@ $(AR) $(EXEC) $(LIBFT) $(OBJS) > /dev/null 2>&1
 
 %.o: %.c
-	@ $(CC) $(FLAGS) -c $< -o $@ > /dev/null 2>&1
+	@ $(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	@ echo "$(RED) Deleting objects..."
@@ -88,7 +88,7 @@ clean:
 fclean:
 	@ echo "$(RED) Deleting all..."
 	@ $(RM) $(OBJS) $(EXEC) > /dev/null 2>&1
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
 
 re: fclean all
 

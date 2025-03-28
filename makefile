@@ -6,17 +6,18 @@
 #    By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 14:17:12 by dacastil          #+#    #+#              #
-#    Updated: 2025/03/28 03:36:59 by dacastil         ###   ########.fr        #
+#    Updated: 2025/03/28 14:49:21 by dacastil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXEC = Minishell
 CC = cc
-CFLAGS = -g3 -I./include -lreadline -lncurses -L/usr/lib -I/usr/include/readline -I/pipex/libft_bonus
+CFLAGS = -g3 -I./include -I/pipex/libft_bonus
 SRC_DIR = ./src
 PIPEX_DIR = ./pipex
+LIBFT = -L./pipex/libft_bonus -lft
 INCLUDE_DIR = ./include
-PIPEX = $(PIPEX_DIR)/pipex.a
+PIPEX = $(PIPEX_DIR)/libpipex.a
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 INCLUDE = $(wildcard $(INCLUDE)/*.h)
 RED             = \033[1;31m
@@ -29,13 +30,13 @@ OBJS = $(SRCS:.c=.o)
 all: $(PIPEX) $(EXEC) $(ARTS)
 
 $(PIPEX):
-	@$(MAKE) -C $(PIPEX_DIR)
+	@$(MAKE) -C $(PIPEX_DIR) > /dev/null 2>&1
 
 $(EXEC): $(OBJS) $(PIPEX)
-	$(CC) $(OBJS) -L$(PIPEX_DIR) -lpipex -o $(EXEC) $(CFLAGS)
+	@$(CC) $(OBJS) -L$(PIPEX_DIR) -o $(EXEC) $(CFLAGS) $(LIBFT) -lpipex -lreadline -lncurses -L/usr/lib -I/usr/include/readline > /dev/null 2>&1
 
 %.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ > /dev/null 2>&1
 
 clean:
 	@ echo "$(RED) Deleting objects..."
@@ -286,7 +287,7 @@ art6:
 	@echo "$(YELLOW)               'MMM88&&&&&&'                       ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗          "
 	@echo "$(YELLOW)                 'MMM8&&&'      *                  ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝         "
 	@echo "$(BLUE)        |\___/|     /\___/\                                 "
-	@echo "$(BLUE)        )     (     $(ARTS)  )    ~( .                            "
+	@echo "$(BLUE)        )     (     )    ~(                             "
 	@echo "$(BLUE)       =\     /=   =\~    /=                        ____  _           _ _                    ___    ___     ____                      _   _ _           "
 	@echo "$(BLUE)         )===(       ) ~ (                         / ___|| |__   ___ | (_)_   ____ _ _ __   ( _ )  ( _ )   |  _ \  __ _  ___ __ _ ___| |_(_) |       "
 	@echo "$(BLUE)        /     \     /     \                        \___ \| '_ \ / _ \| | \ \ / / _\ | '__|  / _ \/\/ _ \/\ | | | |/ _\ |/ __/ _\ / __| __| | |        "
