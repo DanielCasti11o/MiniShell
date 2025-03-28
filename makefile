@@ -6,7 +6,7 @@
 #    By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 14:17:12 by dacastil          #+#    #+#              #
-#    Updated: 2025/03/28 14:49:21 by dacastil         ###   ########.fr        #
+#    Updated: 2025/03/28 15:56:47 by dacastil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ RESTART			= \033[0m
 ARTS = art1 art2 art3 art3_5 art4_5 art4 art5 art6
 OBJS = $(SRCS:.c=.o)
 
-all: $(PIPEX) $(EXEC) $(ARTS)
+all: $(PIPEX) $(EXEC) # $(ARTS)
 
 $(PIPEX):
 	@$(MAKE) -C $(PIPEX_DIR) > /dev/null 2>&1
