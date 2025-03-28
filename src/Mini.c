@@ -3,38 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 20:13:00 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/03/28 03:17:16 by sbolivar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Mini.h"
 
-int	main(int argc, char **argv, char **env)
+int g_exit = 0;
+
+void	manejador_signt(int sig)
+{
+	g_exit = 130;
+	printf("\n\033[32mMiniShell:\033[0m");
+}
+
+char	*ft_mini(int argc, char **argv, char **env)
 {
 	int		i;
 	char	*line_prompt;
-	char	*user;
 	char	*pwd;
 
 	i = 0;
-	user = getenv("USER");
 	pwd = getenv("PWD");
-	user = ft_strjoin(user, "-");
-	user = ft_strjoin(user, pwd);
-	line_prompt = readline(user);
+	line_prompt = readline("\033[32mMiniShell:\033[0m");
 	while (line_prompt != NULL)
 	{
 		printf("-->> %s\n", line_prompt);
-		line_prompt = readline(user);
+		line_prompt = readline("\033[32mMiniShell:\033[0m");
 	}
-	// while (env[i])
-	// {
-	// 	printf("--> %s\n", env[i]);
-	// 	i++;
-	// }
-	return (0);
+	return (line_prompt);
 }
 
+int	main(int argc, char **argv, char **env)
+{
+	signal(SIGINT, manejador_signt);
+	ft_mini(argc, argv, env);
+	return (g_exit);
+}
