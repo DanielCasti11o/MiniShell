@@ -6,11 +6,13 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 20:13:00 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/03/28 03:32:31 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Mini.h"
+#include "../pipex/include/pipex.h"
+#include "../pipex/libft_bonus/libft.h"
 
 int	main(int argc, char **argv, char **env)
 {

@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Mini.h                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/28 03:33:18 by dacastil         ###   ########.fr       */
+/*   Created: 2024/10/02 20:33:12 by dacastil          #+#    #+#             */
+/*   Updated: 2024/10/04 20:14:16 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_H
-# define MINI_H
+#include <stddef.h>
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <fcntl.h>
+char	*ft_strmapi(char const *s, char (*f)(unsigned
+int, char))
+{
+	int		lng;
+	int		i;
+	char	*result;
 
-
-#endif
+	if (!s || !f)
+		return (NULL);
+	lng = ft_strlen(s);
+	i = 0;
+	result = malloc(lng + 1);
+	if (!result)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		result[i] = f(i, s[i]);
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
+}

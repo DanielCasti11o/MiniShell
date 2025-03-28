@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dacastil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 20:31:42 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 19:45:50 by dacastil         ###   ########.fr       */
+/*   Created: 2024/09/17 16:27:01 by dacastil          #+#    #+#             */
+/*   Updated: 2024/09/17 19:25:27 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Mini.h"
-
-int	ft_strlen(const char *s)
+int	ft_isalpha(int c)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
 	{
-		i++;
+		return (1);
 	}
-	return (i);
+	return (0);
 }

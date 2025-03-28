@@ -6,13 +6,13 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:54:23 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 19:43:15 by dacastil         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:27:15 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
-#include "../include/Mini.h"
+#include "libft.h"
 
 static char	*ft_strcpy(char *dest, const char *src)
 {

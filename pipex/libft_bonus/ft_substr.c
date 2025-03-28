@@ -1,49 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 18:47:35 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/27 19:46:10 by dacastil         ###   ########.fr       */
+/*   Created: 2024/09/26 17:37:20 by dacastil          #+#    #+#             */
+/*   Updated: 2024/10/01 18:29:39 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
-#include "../include/Mini.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t	strlng;
+	char	*subst;
 
-	i = 0;
-	j = 0;
-	while (src[j] != '\0')
+	strlng = ft_strlen(s);
+	if (start >= strlng)
 	{
-		j++;
+		return (ft_strdup(""));
 	}
-	if (size == 0)
-		return (j);
-	while (i < (size - 1) && src[i] != '\0')
+	if (len > (strlng - start))
 	{
-		dst[i] = src[i];
-		i++;
+		len = (strlng - start);
 	}
-	dst[i] = '\0';
-	return (j);
+	subst = (char *)malloc((len + 1) * sizeof(char));
+	if (!subst)
+	{
+		return (NULL);
+	}
+	ft_strlcpy(subst, (s + start), (len + 1));
+	return (subst);
 }
-/*
-int main()
-{
-
-	char dst[20] = "";
-	const char src[] = "Adios";
-	size_t n = 4;
-
-	printf("%d\n", ft_strlcpy(dst, src, n));
-	return 0;
-}
-*/

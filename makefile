@@ -6,22 +6,92 @@
 #    By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 14:17:12 by dacastil          #+#    #+#              #
-#    Updated: 2025/03/27 19:20:39 by dacastil         ###   ########.fr        #
+#    Updated: 2025/03/28 03:36:59 by dacastil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXEC = Minishell
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3 # -I./include
+CFLAGS = -g3 -I./include -lreadline -lncurses -L/usr/lib -I/usr/include/readline -I/pipex/libft_bonus
 SRC_DIR = ./src
+PIPEX_DIR = ./pipex
 INCLUDE_DIR = ./include
-SRCS = $(wildcard(SRC_DIR)/*.c)
-INCLUDE = $(wildcard(INCLUDE)/*.h)
+PIPEX = $(PIPEX_DIR)/pipex.a
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+INCLUDE = $(wildcard $(INCLUDE)/*.h)
 RED             = \033[1;31m
 YELLOW          = \033[1;33m
 BLUE            = \033[1;34m
 RESTART			= \033[0m
 ARTS = art1 art2 art3 art3_5 art4_5 art4 art5 art6
+OBJS = $(SRCS:.c=.o)
+
+all: $(PIPEX) $(EXEC) $(ARTS)
+
+$(PIPEX):
+	@$(MAKE) -C $(PIPEX_DIR)
+
+$(EXEC): $(OBJS) $(PIPEX)
+	$(CC) $(OBJS) -L$(PIPEX_DIR) -lpipex -o $(EXEC) $(CFLAGS)
+
+%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	@ echo "$(RED) Deleting objects..."
+	@ $(RM) $(OBJS) > /dev/null 2>&1
+	@$(MAKE) -C $(PIPEX_DIR) clean > /dev/null 2>&1
+
+fclean:
+
+	@clear
+	@echo "$(RED) Deleting all..."
+
+	@ $(RM) $(OBJS) $(EXEC) > /dev/null 2>&1
+	@ $(MAKE) -C $(PIPEX_DIR) fclean > /dev/null 2>&1
+
+	@echo "$(RED)       ▄   ▄"
+	@echo "$(RED)       █▀█▀█"
+	@echo "$(RED)       █▄█▄█"
+	@echo "$(RED)        ███  ▄▄"
+	@echo "$(RED)        ████▐█ █"
+	@echo "$(RED)        ████   █"
+	@echo "$(RED)        ▀▀▀▀▀▀▀"
+	@echo "$(RED)   |$(RESTART)██        $(RED)|"
+	@sleep 0.5
+	@clear
+	@echo "$(RED) Deleting all..."
+	@echo "$(RED)       ▄   ▄"
+	@echo "$(RED)       █▀█▀█"
+	@echo "$(RED)       █▄█▄█"
+	@echo "$(RED)        ███  ▄▄"
+	@echo "$(RED)        ████▐█ █"
+	@echo "$(RED)        ████   █"
+	@echo "$(RED)        ▀▀▀▀▀▀▀"
+	@echo "$(RED)   |$(RESTART)█████     $(RED)|"
+	@sleep 0.5
+	@clear
+	@echo "$(RED) Deleting all..."
+	@echo "$(RED)       ▄   ▄"
+	@echo "$(RED)       █▀█▀█"
+	@echo "$(RED)       █▄█▄█"
+	@echo "$(RED)        ███  ▄▄"
+	@echo "$(RED)        ████▐█ █"
+	@echo "$(RED)        ████   █"
+	@echo "$(RED)        ▀▀▀▀▀▀▀"
+	@echo "$(RED)   |$(RESTART)████████  $(RED)|"
+	@sleep 0.5
+	@clear
+	@echo "$(RED) Deleting all..."
+	@echo "$(RED)       ▄   ▄"
+	@echo "$(RED)       █▀█▀█"
+	@echo "$(RED)       █▄█▄█"
+	@echo "$(RED)        ███  ▄▄"
+	@echo "$(RED)        ████▐█ █"
+	@echo "$(RED)        ████   █"
+	@echo "$(RED)        ▀▀▀▀▀▀▀"
+	@echo "$(RED)   |██████████| OK!"
+	@sleep 0.5
 
 art1:
 
@@ -209,19 +279,19 @@ art6:
 
 	@clear
 	@echo "$(YELLOW)           *     ,MMM8&&&.            *                  "
-	@echo "$(YELLOW)                MMMM88&&&&&    .                   ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗           "
+	@echo "$(YELLOW)                MMMM88&&&&&    .                   ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗                                                                         "
 	@echo "$(YELLOW)               MMMM88&&&&&&&                       ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║          "
 	@echo "$(YELLOW)   *           MMM88&&&&&&&&                       ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║       "
 	@echo "$(YELLOW)               MMM88&&&&&&&&                       ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║          "
 	@echo "$(YELLOW)               'MMM88&&&&&&'                       ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗          "
 	@echo "$(YELLOW)                 'MMM8&&&'      *                  ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝         "
 	@echo "$(BLUE)        |\___/|     /\___/\                                 "
-	@echo "$(BLUE)        )     (     )    ~( .                            "
-	@echo "$(BLUE)       =\     /=   =\~    /=                        ____  _           _ _                    ___    ___     ____                      _   _ _     "
-	@echo "$(BLUE)         )===(       ) ~ (                         / ___|| |__   ___ | (_)_   ____ _ _ __   ( _ )  ( _ )   |  _ \  __ _  ___ __ _ ___| |_(_) | "
-	@echo "$(BLUE)        /     \     /     \                        \___ \| '_ \ / _ \| | \ \ / / _\ | '__|  / _ \/\/ _ \/\ | | | |/ _\ |/ __/ _\ / __| __| | |  "
-	@echo "$(BLUE)        |     |     ) ~   (                         ___) | |_) | (_) | | |\ V / (_| | |    | (_>  < (_>  < | |_| | (_| | (_| (_| \__ \ |_| | |   "
-	@echo "$(BLUE)       /       \   /     ~ \                       |____/|_.__/ \___/|_|_| \_/ \__/_|_|     \___/\/\___/\/ |____/ \__/_|\___\__/_|___/\__|_|_|   "
+	@echo "$(BLUE)        )     (     $(ARTS)  )    ~( .                            "
+	@echo "$(BLUE)       =\     /=   =\~    /=                        ____  _           _ _                    ___    ___     ____                      _   _ _           "
+	@echo "$(BLUE)         )===(       ) ~ (                         / ___|| |__   ___ | (_)_   ____ _ _ __   ( _ )  ( _ )   |  _ \  __ _  ___ __ _ ___| |_(_) |       "
+	@echo "$(BLUE)        /     \     /     \                        \___ \| '_ \ / _ \| | \ \ / / _\ | '__|  / _ \/\/ _ \/\ | | | |/ _\ |/ __/ _\ / __| __| | |        "
+	@echo "$(BLUE)        |     |     ) ~   (                         ___) | |_) | (_) | | |\ V / (_| | |    | (_>  < (_>  < | |_| | (_| | (_| (_| \__ \ |_| | |         "
+	@echo "$(BLUE)       /       \   /     ~ \                       |____/|_.__/ \___/|_|_| \_/ \__/_|_|     \___/\/\___/\/ |____/ \__/_|\___\__/_|___/\__|_|_|         "
 	@echo "$(BLUE)       \       /   \~     ~/                           "
 	@echo "$(RED)jgs_/\_/$(BLUE)\__  _/$(RED)_/\_/$(BLUE)\__~__/$(RED)_/\_/\_/\_/\_/\_              "
 	@echo "$(RED)|  |  |  |$(BLUE)( ( $(RED) |  |  |$(BLUE) ))$(RED)  |  |  |  |  |  |              "
@@ -232,51 +302,6 @@ art6:
 
 secuence:$(ARTS)
 
-fclean:
+re: fclean all
 
-	@clear
-	@echo "$(RED) Deleting all..."
-	@echo "$(RED)       ▄   ▄"
-	@echo "$(RED)       █▀█▀█"
-	@echo "$(RED)       █▄█▄█"
-	@echo "$(RED)        ███  ▄▄"
-	@echo "$(RED)        ████▐█ █"
-	@echo "$(RED)        ████   █"
-	@echo "$(RED)        ▀▀▀▀▀▀▀"
-	@echo "$(RED)   |$(RESTART)██        $(RED)|"
-	@sleep 0.5
-	@clear
-	@echo "$(RED) Deleting all..."
-	@echo "$(RED)       ▄   ▄"
-	@echo "$(RED)       █▀█▀█"
-	@echo "$(RED)       █▄█▄█"
-	@echo "$(RED)        ███  ▄▄"
-	@echo "$(RED)        ████▐█ █"
-	@echo "$(RED)        ████   █"
-	@echo "$(RED)        ▀▀▀▀▀▀▀"
-	@echo "$(RED)   |$(RESTART)█████     $(RED)|"
-	@sleep 0.5
-	@clear
-	@echo "$(RED) Deleting all..."
-	@echo "$(RED)       ▄   ▄"
-	@echo "$(RED)       █▀█▀█"
-	@echo "$(RED)       █▄█▄█"
-	@echo "$(RED)        ███  ▄▄"
-	@echo "$(RED)        ████▐█ █"
-	@echo "$(RED)        ████   █"
-	@echo "$(RED)        ▀▀▀▀▀▀▀"
-	@echo "$(RED)   |$(RESTART)████████  $(RED)|"
-	@sleep 0.5
-	@clear
-	@echo "$(RED) Deleting all..."
-	@echo "$(RED)       ▄   ▄"
-	@echo "$(RED)       █▀█▀█"
-	@echo "$(RED)       █▄█▄█"
-	@echo "$(RED)        ███  ▄▄"
-	@echo "$(RED)        ████▐█ █"
-	@echo "$(RED)        ████   █"
-	@echo "$(RED)        ▀▀▀▀▀▀▀"
-	@echo "$(RED)   |██████████| OK!"
-	@sleep 0.5
-
-re: fclean secuence
+.PHONY: all clean fclean re
