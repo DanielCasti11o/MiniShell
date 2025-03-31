@@ -6,7 +6,7 @@
 #    By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 14:17:12 by dacastil          #+#    #+#              #
-#    Updated: 2025/03/28 15:56:47 by dacastil         ###   ########.fr        #
+#    Updated: 2025/03/31 15:24:10 by dacastil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ $(PIPEX):
 	@$(MAKE) -C $(PIPEX_DIR) > /dev/null 2>&1
 
 $(EXEC): $(OBJS) $(PIPEX)
-	@$(CC) $(OBJS) -L$(PIPEX_DIR) -o $(EXEC) $(CFLAGS) $(LIBFT) -lpipex -lreadline -lncurses -L/usr/lib -I/usr/include/readline > /dev/null 2>&1
+	@$(CC) $(OBJS) -L$(PIPEX_DIR) -o $(EXEC) $(LIBFT) $(CFLAGS) -lpipex -lreadline -lncurses -L/usr/lib -I/usr/include/readline > /dev/null 2>&1
+
 
 %.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ > /dev/null 2>&1
