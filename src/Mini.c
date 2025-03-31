@@ -6,13 +6,14 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/28 16:37:59 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:31:06 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Mini.h"
 #include "../pipex/include/pipex.h"
 #include "../pipex/libft_bonus/libft.h"
+#include <signal.h>
 
 //	----------- Sí quiere ver los env dentro de un programa main ----------
 
@@ -43,19 +44,7 @@
    SHELL FACTORY     |
 -----------------    V
 
-int	build_factory(t_shell	*mini)
-{
-	mini = malloc(sizeof(t_shell));
-	if (!mini)
-		return (0);
-	mini->data_prompt = malloc(sizeof(t_prompt));
-	if (!mini->data_prompt)
-		return (0);
-	mini->data_prompt->line_prompt = NULL;
-	mini->data_prompt->pwd = getenv("PWD");
-	mini->data_prompt->user = "\033[44;97m";
-	return (1);
-}
+
 
 Estaba intentando meter esto del prompt con la nueva implementacion de la estructura pero
 me estaba dando unos segfaults que tengo que revisar para poder seguir mirandolo.
@@ -66,16 +55,16 @@ me estaba dando unos segfaults que tengo que revisar para poder seguir mirandolo
 
 void	ft_prompt(t_shell *mini)
 {
-	mini->data_prompt->user = ft_strjoin(mini->data_prompt->user, getenv("USER"));
-	mini->data_prompt->user = ft_strjoin(mini->data_prompt->user, "\033[0m \033[38;5;82m");
-	mini->data_prompt->user = ft_strjoin(mini->data_prompt->user, "-");
-	mini->data_prompt->user = ft_strjoin(mini->data_prompt->user, mini->data_prompt->pwd);
-	mini->data_prompt->user = ft_strjoin(mini->data_prompt->user, " ~ \033[0;0m");
-	mini->data_prompt->line_prompt = readline(mini->data_prompt->user);
-	while (mini->data_prompt->line_prompt != NULL)
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, getenv("USER"));
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "-");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, mini->data_pt->pwd);
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, " ~ \033[0;0m");
+	mini->data_pt->line_prompt = readline(mini->data_pt->user);
+	while (mini->data_pt->line_prompt != NULL)
 	{
-		printf("%s\n", mini->data_prompt->line_prompt);
-		mini->data_prompt->line_prompt = readline(mini->data_prompt->user);
+		printf("%s\n", mini->data_pt->line_prompt);
+		mini->data_pt->line_prompt = readline(mini->data_pt->user);
 	}
 
 }
@@ -83,33 +72,73 @@ void	ft_prompt(t_shell *mini)
 */
 
 
+t_shell	*build_factory(void)
+{
+	t_shell	*new;
+
+	new = malloc(sizeof(t_shell));
+	if (!new)
+		return (NULL);
+	new->data_pt = malloc(sizeof(t_prompt));
+	if (!new->data_pt)
+		return (NULL);
+	new->data_pt->line_prompt = NULL;
+	new->data_pt->pwd = getenv("PWD");
+	new->data_pt->user = "\033[44;97m";
+	return (new);
+}
+
 void	ft_prompt(t_shell *mini)
 {
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "@MINISHELL");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "-");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, mini->data_pt->pwd);
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, " ~ \033[0;0m");
+	mini->data_pt->line_prompt = readline(mini->data_pt->user);
+	while (mini->data_pt->line_prompt != NULL)
+	{
+		printf("%s\n", mini->data_pt->line_prompt);
+		mini->data_pt->line_prompt = readline(mini->data_pt->user);
+	}
+
 }
+
+void	sigint_handler(int sign)
+{
+	(void)sign;
+	write(1, "\n", 1);
+	rl_on_new_line();    // Indica que hay una nueva línea (obligatorio para readline)
+	rl_replace_line("", 0); // Limpia la línea actual en el prompt
+	rl_redisplay();
+}
+
+
+void ft_signals(void)
+{
+    struct sigaction sa;
+
+    sa.sa_handler = sigint_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    if (sigaction(SIGINT, &sa, NULL) == -1)
+    {
+        perror("Signal failed\n");
+        exit(1);
+    }
+}
+
+
 
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	*mini;
 	int		i;
-	char	*line_prompt;
-	char	*user;
-	char	*pwd;
 
 	i = 0;
-
-	user = "\033[44;97m";
-	user = ft_strjoin(user, getenv("USER"));
-	pwd = getenv("PWD");
-	user = ft_strjoin(user, "\033[0m \033[38;5;82m");
-	user = ft_strjoin(user, "-");
-	user = ft_strjoin(user, pwd);
-	user = ft_strjoin(user, " ~ \033[0;0m");
-	line_prompt = readline(user);
-	while (line_prompt != NULL)
-	{
-		printf("%s\n", line_prompt);
-		line_prompt = readline(user);
-	}
+	ft_signals();
+	mini = build_factory();
+	ft_prompt(mini);
 	return (0);
 }
 
