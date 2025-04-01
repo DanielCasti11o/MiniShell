@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/31 14:31:06 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:27:44 by sbolivar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,34 +101,9 @@ void	ft_prompt(t_shell *mini)
 		printf("%s\n", mini->data_pt->line_prompt);
 		mini->data_pt->line_prompt = readline(mini->data_pt->user);
 	}
-
+	if (mini->data_pt->line_prompt == NULL)
+		printf("exit");
 }
-
-void	sigint_handler(int sign)
-{
-	(void)sign;
-	write(1, "\n", 1);
-	rl_on_new_line();    // Indica que hay una nueva línea (obligatorio para readline)
-	rl_replace_line("", 0); // Limpia la línea actual en el prompt
-	rl_redisplay();
-}
-
-
-void ft_signals(void)
-{
-    struct sigaction sa;
-
-    sa.sa_handler = sigint_handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
-    if (sigaction(SIGINT, &sa, NULL) == -1)
-    {
-        perror("Signal failed\n");
-        exit(1);
-    }
-}
-
-
 
 int	main(int argc, char **argv, char **env)
 {
@@ -141,4 +116,3 @@ int	main(int argc, char **argv, char **env)
 	ft_prompt(mini);
 	return (0);
 }
-

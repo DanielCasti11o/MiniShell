@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/31 13:34:38 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:06:34 by sbolivar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ typedef struct s_shell
 	t_prompt	*data_pt;
 }	t_shell;
 
+void	ft_signals(void);
+void	ctrl_c(int sign);
 
 #endif
