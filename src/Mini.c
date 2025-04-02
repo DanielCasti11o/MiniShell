@@ -6,7 +6,7 @@
 /*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/02 03:14:09 by sbolivar         ###   ########.fr       */
+/*   Updated: 2025/04/02 03:41:28 by sbolivar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,13 @@ t_shell	*build_factory(void)
 
 void	ft_prompt(t_shell *mini)
 {
-	char	*temp_user;
-
-	temp_user = "\033[44;97m@MINISHELL\033[0m\033[38;5;82m";
-	temp_user = ft_strjoin(temp_user, "\033[0m \033[38;5;82m");
-	temp_user = ft_strjoin(temp_user, "-");
-	temp_user = ft_strjoin(temp_user, mini->data_pt->pwd);
-	temp_user = ft_strjoin(temp_user, " ~ \033[0;0m");
-	temp_user = readline(temp_user);
-	mini->data_pt->input = temp_user;
+	mini->data_pt->user = "\033[44;97m@MINISHELL\033[0m\033[38;5;82m";
+	mini->data_pt->user
+		= ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "-");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, mini->data_pt->pwd);
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, " ~ \033[0;0m");
+	mini->data_pt->input = readline(mini->data_pt->user);
 	while (mini->data_pt->input != NULL)
 	{
 		// printf("%s\n", mini->data_pt->line_prompt);
