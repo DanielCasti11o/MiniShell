@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+         #
+#    By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 14:17:12 by dacastil          #+#    #+#              #
-#    Updated: 2025/03/31 15:24:10 by dacastil         ###   ########.fr        #
+#    Updated: 2025/04/01 17:02:18 by sbolivar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ $(PIPEX):
 	@$(MAKE) -C $(PIPEX_DIR) > /dev/null 2>&1
 
 $(EXEC): $(OBJS) $(PIPEX)
-	@$(CC) $(OBJS) -L$(PIPEX_DIR) -o $(EXEC) $(LIBFT) $(CFLAGS) -lpipex -lreadline -lncurses -L/usr/lib -I/usr/include/readline > /dev/null 2>&1
+	$(CC) $(OBJS) -L$(PIPEX_DIR) -o $(EXEC) $(LIBFT) $(CFLAGS) -lpipex -lreadline -lncurses -L/usr/lib -I/usr/include/readline > /dev/null 2>&1
 
 
 %.o: $(SRC_DIR)/%.c
@@ -51,6 +51,8 @@ fclean:
 
 	@ $(RM) $(OBJS) $(EXEC) > /dev/null 2>&1
 	@ $(MAKE) -C $(PIPEX_DIR) fclean > /dev/null 2>&1
+
+art flean:
 
 	@echo "$(RED)       ▄   ▄"
 	@echo "$(RED)       █▀█▀█"

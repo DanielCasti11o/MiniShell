@@ -6,7 +6,7 @@
 /*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/01 16:06:34 by sbolivar         ###   ########.fr       */
+/*   Updated: 2025/04/02 03:15:36 by sbolivar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_prompt
 {
 	char	*pwd;
 	char	*user;
-	char	*line_prompt;
+	char	*input;
 }	t_prompt;
 
 typedef struct s_shell
@@ -37,5 +37,6 @@ typedef struct s_shell
 
 void	ft_signals(void);
 void	ctrl_c(int sign);
+void	ft_buildings(t_shell *mini);
 
 #endif

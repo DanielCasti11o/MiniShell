@@ -6,7 +6,7 @@
 /*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:57:50 by sbolivar          #+#    #+#             */
-/*   Updated: 2025/04/01 16:22:34 by sbolivar         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:35:27 by sbolivar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_signals(void)
 {
 	struct sigaction	sa;
 
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);  // SABES
 	sa.sa_handler = ctrl_c;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
