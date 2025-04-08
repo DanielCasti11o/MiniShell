@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/02 03:41:28 by sbolivar         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:47:40 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ t_shell	*build_factory(void)
 	return (new);
 }
 
-void	ft_prompt(t_shell *mini)
+void	ft_prompt(t_shell *mini, char **env)
 {
+	char **com;
 	mini->data_pt->user = "\033[44;97m@MINISHELL\033[0m\033[38;5;82m";
 	mini->data_pt->user
 		= ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
@@ -100,6 +101,11 @@ void	ft_prompt(t_shell *mini)
 	{
 		// printf("%s\n", mini->data_pt->line_prompt);
 		ft_buildings(mini);
+		if (ft_countsubstr(mini->data_pt->input, ' ') <= 2)
+		{
+			com = ft_split(mini->data_pt->input, '|');
+			process_command(env, com, 0);
+		}
 		mini->data_pt->input = readline(mini->data_pt->user);
 	}
 	if (mini->data_pt->input == NULL)
@@ -114,6 +120,6 @@ int	main(int argc, char **argv, char **env)
 	i = 0;
 	ft_signals();
 	mini = build_factory();
-	ft_prompt(mini);
+	ft_prompt(mini, env);
 	return (0);
 }

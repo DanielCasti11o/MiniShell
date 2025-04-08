@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:10:22 by dacastil          #+#    #+#             */
-/*   Updated: 2025/03/21 13:44:40 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:25:11 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	create_process(t_pid *process, char **argv, char **envp)
 	waitpid(process->pid1, NULL, 0);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	pipex_main(int argc, char **argv, char **envp)
 {
 	t_pid	process;
 

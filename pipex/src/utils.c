@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:32:11 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/03/21 13:34:09 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:44:20 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 
 void	ft_error(char *msg, int flag)
 {
-	int	i;
-
-	i = 0;
 	ft_putstr(msg);
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);

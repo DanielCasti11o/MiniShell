@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+         #
+#    By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 14:17:12 by dacastil          #+#    #+#              #
-#    Updated: 2025/04/01 17:02:18 by sbolivar         ###   ########.fr        #
+#    Updated: 2025/04/08 15:22:48 by daniel-cast      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXEC = Minishell
 CC = cc
-CFLAGS = -g3 -I./include -I/pipex/libft_bonus
+CFLAGS = -g3 -I./include -I./pipex/libft_bonus
 SRC_DIR = ./src
 PIPEX_DIR = ./pipex
 LIBFT = -L./pipex/libft_bonus -lft
@@ -30,10 +30,12 @@ OBJS = $(SRCS:.c=.o)
 all: $(PIPEX) $(EXEC) # $(ARTS)
 
 $(PIPEX):
-	@$(MAKE) -C $(PIPEX_DIR) > /dev/null 2>&1
+	@ $(MAKE) -C $(PIPEX_DIR) > /dev/null 2>&1
 
 $(EXEC): $(OBJS) $(PIPEX)
-	$(CC) $(OBJS) -L$(PIPEX_DIR) -o $(EXEC) $(LIBFT) $(CFLAGS) -lpipex -lreadline -lncurses -L/usr/lib -I/usr/include/readline > /dev/null 2>&1
+	
+	$(CC) $(OBJS) $(CFLAGS) -L$(PIPEX_DIR) -lpipex $(LIBFT) -lreadline -lncurses -o $(EXEC)
+
 
 
 %.o: $(SRC_DIR)/%.c
