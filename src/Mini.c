@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/09 12:08:00 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/04/14 20:07:47 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ t_shell	*build_factory(void)
 
 void	ft_prompt(t_shell *mini, char **env)
 {
-	char **com;
-	int status;
+	char	**com;
+	int		status;
+	int		flag;
 	mini->data_pt->user = "\033[44;97m@MINISHELL\033[0m\033[38;5;82m";
 	mini->data_pt->user
 		= ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
@@ -100,22 +101,27 @@ void	ft_prompt(t_shell *mini, char **env)
 	mini->data_pt->input = readline(mini->data_pt->user);
 	while (1)
 	{
-		if (mini->data_pt->input == NULL)
-				ft_error("exit\n", 127);
-		// printf("%s\n", mini->data_pt->line_prompt);
-		ft_buildings(mini);
-		if (ft_countsubstr(mini->data_pt->input, ' ') <= 2)
-		{
-			mini->pid_com = fork();
-			if (mini->pid_com < 0)
-				ft_error("ERROR: child no created\n", 1);
-			if (mini->pid_com == 0)
-			{
-				com = ft_split(mini->data_pt->input, '|');
-				process_command(env, com, 0);
-			}
-			waitpid(mini->pid_com, &status, 0);
-		}
+		flag = parse(mini, env);
+		printf ("caseee ->> %d\n", flag);
+		posible_cases(mini, flag, env);
+		// ft_buildings(mini);
+		// if (ft_countsubstr(mini->data_pt->input, ' ') <= 2)
+		// {
+		// 	mini->pid_com = fork();
+		// 	if (mini->pid_com < 0)
+		// 		ft_error("ERROR: child no created\n", 1);
+		// 	if (mini->pid_com == 0)
+		// 	{
+		// 		com = ft_split(mini->data_pt->input, '|');
+		// 		process_command(env, com, 0);
+		// 	}
+		// 	waitpid(mini->pid_com, &status, 0);
+		// }
+		// else
+		// {
+		// 	com = ft_split(mini->data_pt->input, '|');
+		// 	case_pipex(mini, env);
+		// }
 		mini->data_pt->input = readline(mini->data_pt->user);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/09 11:55:20 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/04/14 20:19:39 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,49 @@
 # include "../pipex/libft_bonus/libft.h"
 # include <signal.h>
 
+enum type_tok
+{
+	COM,
+	BUILD,
+	RED,
+	ARG,
+	PIPE,
+	INFILE,
+	OUTFILE,
+};
+
 typedef struct s_prompt
 {
 	char	*pwd;
 	char	*user;
 	char	*input;
+
 }	t_prompt;
 
 typedef struct s_shell
 {
 	t_prompt	*data_pt;
+	pid_t		pid_com;
+
+}	t_shell;
+
 
 	// --------------
 	// [ QUE ES PID_T]
 	// --------------
 	// identificador de proceso hijo que se usará para los comandos,
 	// ya que para realizar un comando debemos crear un proceso hijo que lo ejecute para que el padre que es el programa de la mini lo muestre
-	pid_t       pid_com; 
-}	t_shell;
 
 void	ft_signals(void);
 void	ctrl_c(int sign);
 void	ft_buildings(t_shell *mini);
 void	ft_prompt(t_shell *mini, char **env);
+int		parse(t_shell *mini, char **env);
+int		cases_builds(char *input);
+int		cases_com(char *input, char **env);
+int		other_cases(char *input);
+void	posible_cases(t_shell *mini, int flag, char **env);
+void	redirects(t_shell *mini);
+
 
 #endif

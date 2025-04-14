@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbolivar <sbolivar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:36:09 by sbolivar          #+#    #+#             */
-/*   Updated: 2025/04/02 03:41:46 by sbolivar         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:15:43 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_cd(char	**dir, t_shell *mini)
 {
 	if (dir[1] == NULL || !ft_strncmp(dir[0], "", 2))
 		dir[1] = getenv("HOME");
-	if (chdir(dir[1]) == -1) 
+	if (chdir(dir[1]) == -1)
 	{
 		perror("Error al cambiar de directorio");
 		return ;
@@ -33,6 +33,7 @@ void	ft_buildings(t_shell *mini)
 	int		i;
 	char	**dir;
 
+	printf("entra \n");
 	dir = ft_split(mini->data_pt->input, ' ');
 	i = 0;
 	if (dir[0] && !ft_strncmp(dir[0], "pwd", 4))
