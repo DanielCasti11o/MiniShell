@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:49:00 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/14 20:14:34 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:03:42 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,33 @@ int	cases_builds(char *input)
 		return (COM);
 }
 
+// if (access(path, X_OK) == 0)
+// 		{
+
 int	cases_com(char *input, char **env)
 {
 	char	**split_com;
+	char	**path;
+	char	*line_p;
+	int		i;
 
+	path = ft_findpath(env);
 	split_com = ft_split(input, '|');
-	if (execve(input, split_com, env) == -1)
-		return (fr_words(split_com), ARG);
-	else
-		return (COM);
+	i = 0;
+	while (path[i])
+	{
+		line_p = creat_path(path[i], split_com[0]);
+		if (!line_p)
+			return (fr_words(path), fr_words(split_com),
+				ft_error("ERROR: path\n", 1), ARG);
+		if (access(line_p, X_OK) == 0)
+			return (fr_words(path), fr_words(split_com), free(line_p), COM);
+		free(line_p);
+		i++;
+	}
+	fr_words(path);
+	fr_words(split_com);
+	return (ARG);
 }
 
 int	other_cases(char *input)
@@ -83,13 +101,15 @@ int	parse(t_shell *mini, char **env)
 	if (input == NULL)
 		ft_error("exit\n", 127);
 	value_token = cases_builds(input);
-	printf ("token --> %d\n", value_token);
+	// printf ("token --> %d\n", value_token);
 	if (value_token == BUILD)
 		return (BUILD);
 	value_token = cases_com(input, env);
-	printf ("token --> %d\n", value_token);
+	// printf ("token --> %d\n", value_token);
 	if (value_token == COM)
 		return (COM);
+	else if (value_token == ARG)
+		return (ARG);
 	value_token = other_cases(input);
 	if (value_token == RED)
 		return (RED);

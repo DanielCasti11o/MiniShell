@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/14 20:19:39 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:53:01 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../pipex/libft_bonus/libft.h"
 # include <signal.h>
 
-enum type_tok
+enum	e_type_tok
 {
 	COM,
 	BUILD,
@@ -46,6 +46,7 @@ typedef struct s_shell
 {
 	t_prompt	*data_pt;
 	pid_t		pid_com;
+	char		**path;
 
 }	t_shell;
 
@@ -56,6 +57,7 @@ typedef struct s_shell
 	// identificador de proceso hijo que se usará para los comandos,
 	// ya que para realizar un comando debemos crear un proceso hijo que lo ejecute para que el padre que es el programa de la mini lo muestre
 
+t_shell	*build_factory(void);
 void	ft_signals(void);
 void	ctrl_c(int sign);
 void	ft_buildings(t_shell *mini);

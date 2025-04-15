@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:16:01 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/14 20:18:33 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:04:22 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	posible_cases(t_shell *mini, int flag, char **env)
 	int		status;
 	char	**com;
 
-	printf("flag = %d", flag);
+	// printf("flag = %d", flag);
 	if (flag == BUILD)
 		ft_buildings(mini);
 	else if (flag == COM)

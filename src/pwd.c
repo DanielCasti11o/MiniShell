@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:36:09 by sbolivar          #+#    #+#             */
-/*   Updated: 2025/04/14 20:15:43 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:05:33 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_buildings(t_shell *mini)
 	int		i;
 	char	**dir;
 
-	printf("entra \n");
+	// printf("entra \n");
 	dir = ft_split(mini->data_pt->input, ' ');
 	i = 0;
 	if (dir[0] && !ft_strncmp(dir[0], "pwd", 4))

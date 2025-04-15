@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/14 20:07:47 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:03:33 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,26 +102,8 @@ void	ft_prompt(t_shell *mini, char **env)
 	while (1)
 	{
 		flag = parse(mini, env);
-		printf ("caseee ->> %d\n", flag);
+		// printf ("caseee ->> %d\n", flag);
 		posible_cases(mini, flag, env);
-		// ft_buildings(mini);
-		// if (ft_countsubstr(mini->data_pt->input, ' ') <= 2)
-		// {
-		// 	mini->pid_com = fork();
-		// 	if (mini->pid_com < 0)
-		// 		ft_error("ERROR: child no created\n", 1);
-		// 	if (mini->pid_com == 0)
-		// 	{
-		// 		com = ft_split(mini->data_pt->input, '|');
-		// 		process_command(env, com, 0);
-		// 	}
-		// 	waitpid(mini->pid_com, &status, 0);
-		// }
-		// else
-		// {
-		// 	com = ft_split(mini->data_pt->input, '|');
-		// 	case_pipex(mini, env);
-		// }
 		mini->data_pt->input = readline(mini->data_pt->user);
 	}
 }
