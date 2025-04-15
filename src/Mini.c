@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/15 15:03:33 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:39:20 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_prompt(t_shell *mini, char **env)
 	char	**com;
 	int		status;
 	int		flag;
+
 	mini->data_pt->user = "\033[44;97m@MINISHELL\033[0m\033[38;5;82m";
 	mini->data_pt->user
 		= ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
