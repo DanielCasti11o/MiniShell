@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:16:01 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/15 16:36:41 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:57:08 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	posible_cases(t_shell *mini, int flag, char **env)
 		if (mini->pid_com == 0)
 		{
 			com = ft_split(mini->data_pt->input, '|');
-			for (int i = 0; com[i]; i++)
-				printf("%s\n", com[i]);
 			process_command(env, com, 0);
 		}
 		waitpid(mini->pid_com, &status, 0);

@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/15 14:53:01 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:06:29 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,22 @@ typedef struct s_prompt
 
 }	t_prompt;
 
+
+// Permisos totales para 0644
+//     Esto significa:
+//     Propietario: Puede leer y escribir (rw-).
+    // Grupo: Solo puede leer (r--).
+    // Otros: Solo pueden leer (r--).
+
+typedef struct s_parser
+{
+	char		**command; // comando con su arg
+	char		*input;		// infile
+	char		*output;	// outfile
+	t_parser	*next; // -->
+
+}	t_parser;
+
 typedef struct s_shell
 {
 	t_prompt	*data_pt;
@@ -68,6 +84,5 @@ int		cases_com(char *input, char **env);
 int		other_cases(char *input);
 void	posible_cases(t_shell *mini, int flag, char **env);
 void	redirects(t_shell *mini);
-
 
 #endif

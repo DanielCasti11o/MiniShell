@@ -6,7 +6,7 @@
 /*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:49:00 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/15 16:39:28 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:26:58 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	other_cases(char *input)
 	split_input = ft_split(input, ' ');
 	while (split_input[i])
 	{
-		if ((ft_strncmp(split_input[i], "<", 1) == 0) && split_input[i - 1]
-			|| (ft_strncmp(split_input[i], "<<", 2) == 0) && split_input[i - 1])
+		if ((ft_strncmp(split_input[i], "<", 1) == 0) && split_input[i + 1]
+			|| (ft_strncmp(split_input[i], "<<", 2) == 0) && split_input[i + 1])
 			return (fr_words(split_input), INFILE);
 		else if ((ft_strncmp(split_input[i], ">", 1) == 0) && split_input[i + 1]
 			|| (ft_strncmp(split_input[i], ">>", 2) == 0) && split_input[i + 1])
