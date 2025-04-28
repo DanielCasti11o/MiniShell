@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:30 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/15 16:39:20 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:22:56 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,15 @@ void	ft_prompt(t_shell *mini, char **env)
 	int		flag;
 
 	mini->data_pt->user = "\033[44;97m@MINISHELL\033[0m\033[38;5;82m";
-	mini->data_pt->user
-		= ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
+	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "\033[0m \033[38;5;82m");
 	mini->data_pt->user = ft_strjoin(mini->data_pt->user, "-");
 	mini->data_pt->user = ft_strjoin(mini->data_pt->user, mini->data_pt->pwd);
 	mini->data_pt->user = ft_strjoin(mini->data_pt->user, " ~ \033[0;0m");
 	mini->data_pt->input = readline(mini->data_pt->user);
 	while (1)
 	{
+		if (ft_strncmp(mini->data_pt->input, "\n", 1) == 0)
+			printf("%s", mini->data_pt->input);
 		flag = parse(mini, env);
 		// printf ("caseee ->> %d\n", flag);
 		posible_cases(mini, flag, env);

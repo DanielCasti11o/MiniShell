@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:11:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/04/16 16:06:29 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:39:17 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_parser
 	char		**command; // comando con su arg
 	char		*input;		// infile
 	char		*output;	// outfile
+
 	t_parser	*next; // -->
 
 }	t_parser;
